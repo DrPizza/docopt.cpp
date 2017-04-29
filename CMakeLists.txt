@@ -16,8 +16,8 @@ option(USE_BOOST_REGEX "Replace std::regex with Boost.Regex" OFF)
 # C++ standard
 set(CMAKE_CXX_STANDARD_REQUIRED ON)
 set(CMAKE_CXX_EXTENSIONS OFF)
-if(NOT CMAKE_CXX_STANDARD OR CMAKE_CXX_STANDARD LESS 11)
-	set(CMAKE_CXX_STANDARD 11)
+if(NOT CMAKE_CXX_STANDARD OR CMAKE_CXX_STANDARD LESS 17)
+	set(CMAKE_CXX_STANDARD 17)
 endif()
 
 # Suppression of "unknown pragma" warning on GCC
@@ -33,7 +33,6 @@ set(docopt_HEADERS
 		docopt.h
 		docopt_private.h
 		docopt_util.h
-		docopt_value.h
 		)
 
 #============================================================================
@@ -68,6 +67,7 @@ if(MSVC)
     #                 "PRIVATE" means it's only defined when building the DLL.
     target_compile_definitions(docopt PUBLIC  DOCOPT_DLL
                                       PRIVATE DOCOPT_EXPORTS)
+    SET( CMAKE_CXX_FLAGS  "${CMAKE_CXX_FLAGS} /std:c++latest" )
 endif()
 
 if(NOT MSVC)
